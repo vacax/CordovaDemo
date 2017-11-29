@@ -19,7 +19,10 @@
 var app = {
     // Application Constructor
     initialize: function() {
+
         this.bindEvents();
+
+
     },
     // Bind Event Listeners
     //
@@ -34,6 +37,32 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+
+        //buscar el api en https://api.nasa.gov/index.htm
+        var url = "https://api.nasa.gov/planetary/apod?api_key=to36LZGwYuYt77MftMuOuK0ubxKousIKiTDjcm8n";
+
+        $("#cargarImagen").click(function(){
+
+            console.log("Presionando el boton...");
+
+            $.ajax({
+                url: url,
+                success: handleResult
+            });
+
+            function handleResult(result){
+                $("#imagenNasa").attr("src", result.url);
+
+                // Using http://responsiveimg.com library
+
+                $("#imagenNasa").responsiveImg();
+
+                $("#copyright").text("Copyright: " + result.copyright) ;
+                $("#desc").text(result.explanation);
+            }
+        });
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -62,3 +91,6 @@ var app = {
 };
 
 app.initialize();
+
+
+

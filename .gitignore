@@ -49,3 +49,8 @@ fabric.properties
 #incluyendo gitignore for apache cordava.
 platforms/
 plugins/
+info.txt
+node_modules/
+package.json
+prepare/
+run/
